@@ -1,0 +1,40 @@
+nohup: ignoring input
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://169.254.0.21:5001
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 972-015-892
+127.0.0.1 - - [18/Sep/2025 13:08:08] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:10:00] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:11:37] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+169.254.0.21 - - [18/Sep/2025 13:13:17] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:15:00] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:15:17] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:20:25] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:21:50] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:24:10] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:25:39] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:29:56] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:32:11] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:37:05] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:38:34] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:40:08] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:41:37] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:43:45] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 13:46:55] "GET /api/unidades?cidade=Salvador&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 16:36:37] "GET /api/unidades?cidade=Sao%20Paulo&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 16:40:15] "GET /api/unidades?cidade=São%20Paulo&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 16:40:55] "GET /api/unidades?cidade=São%20Paulo&radius=50000 HTTP/1.1" 200 -
+127.0.0.1 - - [18/Sep/2025 16:41:21] "GET /api/unidades?cidade=Rio%20de%20Janeiro&radius=50000 HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/meia-lua-modificado/backend/app.py', reloading
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 972-015-892
