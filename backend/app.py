@@ -20,7 +20,7 @@ def create_app():
             "allow_headers": ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
             "supports_credentials": True
         }
-    })
+    } )
     bcrypt.init_app(app)
     migrate = Migrate(app, db)
 
@@ -37,8 +37,4 @@ def create_app():
     app.register_blueprint(free_maps_bp, url_prefix='/api')
 
     return app
-
-if __name__ == '__main__':
-    app = create_app()
-    app.run(debug=True, host='0.0.0.0', port=5001)
 
