@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from extensions import db, jwt, cors, bcrypt
+from .extensions import db, jwt, cors, bcrypt
 from routes.treatment_units import treatment_units_bp
 from routes.free_maps import free_maps_bp
 from config import Config
