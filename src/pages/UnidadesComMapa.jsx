@@ -134,7 +134,7 @@ const UnidadesComMapa = () => {
     setError(null);
 
     try {
-      const url = `http://localhost:5001/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000`;
+      const url = `https://meialuaback.onrender.com/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000`;
       console.log("URL da requisição:", url);
       
       const response = await fetch(url);
@@ -185,7 +185,7 @@ const UnidadesComMapa = () => {
       setLoading(true);
       setError(null);
       
-      const url = `http://localhost:5001/api/unidades?lat=${lat}&lng=${lng}&radius=50000`;
+      const url = `https://meialuaback.onrender.com/api/unidades?lat=${lat}&lng=${lng}&radius=50000`;
       console.log("URL da requisição:", url);
       
       const response = await fetch(url);
