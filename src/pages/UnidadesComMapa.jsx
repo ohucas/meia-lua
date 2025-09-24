@@ -53,6 +53,8 @@ function MapController({ center, zoom }) {
   return null;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://meialuaback.onrender.com';
+
 const UnidadesComMapa = () => {
   const [unidades, setUnidades] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -134,7 +136,7 @@ const UnidadesComMapa = () => {
     setError(null);
 
     try {
-      const url = `https://meialuaback.onrender.com/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000`;
+      const url = `${API_BASE_URL}/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000`;
       console.log("URL da requisição:", url);
       
       const response = await fetch(url);
@@ -185,7 +187,7 @@ const UnidadesComMapa = () => {
       setLoading(true);
       setError(null);
       
-      const url = `https://meialuaback.onrender.com/api/unidades?lat=${lat}&lng=${lng}&radius=50000`;
+      const url = `${API_BASE_URL}/api/unidades?lat=${lat}&lng=${lng}&radius=50000`;
       console.log("URL da requisição:", url);
       
       const response = await fetch(url);
@@ -542,5 +544,3 @@ const UnidadesComMapa = () => {
 };
 
 export default UnidadesComMapa;
-
-
