@@ -8,7 +8,7 @@ const Footer = () => {
           <p className="text-lg mb-4">
             Sistema Meia Lua desenvolvido pela{' '}
             <a 
-              href="https://instagram.com/bripes.oficial" 
+              href="https://instagram.com/bripesbr" 
               target="_blank" 
               rel="noopener noreferrer"
               className="font-semibold hover:text-red-200 transition-colors duration-200 inline-flex items-center gap-2"
