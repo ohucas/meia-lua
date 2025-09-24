@@ -30,7 +30,7 @@ class Config:
     JWT_SECRET_KEY = os.environ.get("JWT_SECRET", "meialua-super-secret-key-2024-production")
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
     CORS_HEADERS = "Content-Type"
-    CORS_ORIGINS = os.environ.get("CORS_ORIGINS", "http://localhost:5173,http://localhost:5500").split(",")
+    CORS_ORIGINS = os.environ.get("CORS_ORIGINS", "https://meia-lua.vercel.app,http://localhost:5500").split(",")
     SCHEDULE_DAYS = os.environ.get("SCHEDULE_DAYS", "Tue,Wed,Thu").split(",")
     SCHEDULE_START = os.environ.get("SCHEDULE_START", "06:00")
     SCHEDULE_END = os.environ.get("SCHEDULE_END", "12:00")
