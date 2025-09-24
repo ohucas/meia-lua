@@ -1,11 +1,11 @@
 from flask import Flask, jsonify
-from .extensions import db, jwt, cors, bcrypt
-from .routes.treatment_units import treatment_units_bp
-from .routes.free_maps import free_maps_bp
-from config import Config
+from backend.extensions import db, jwt, cors, bcrypt
+from backend.routes.treatment_units import treatment_units_bp
+from backend.routes.free_maps import free_maps_bp
+from backend.config import Config
 from flask_migrate import Migrate
 # Importar todos os modelos para garantir que sejam registrados
-from .models import *
+from backend.models import *
 
 def create_app():
     app = Flask(__name__)
@@ -20,11 +20,11 @@ def create_app():
             "allow_headers": ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
             "supports_credentials": True
         }
-    } )
+    }  )
     bcrypt.init_app(app)
     migrate = Migrate(app, db)
 
-    @app.route('/')
+    @app.route("/")
     def health_check():
         return jsonify({
             "status": "ok",
@@ -33,8 +33,7 @@ def create_app():
         })
 
     # Apenas rotas necessárias para Unidades e Mapas públicos
-    app.register_blueprint(treatment_units_bp, url_prefix='/unidades-tratamento')
-    app.register_blueprint(free_maps_bp, url_prefix='/api')
+    app.register_blueprint(treatment_units_bp, url_prefix="/unidades-tratamento")
+    app.register_blueprint(free_maps_bp, url_prefix="/api")
 
     return app
-
