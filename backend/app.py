@@ -1,8 +1,8 @@
-from .flask import Flask, jsonify
+from flask import Flask, jsonify
 from .extensions import db, jwt, cors, bcrypt
 from .routes.treatment_units import treatment_units_bp
 from .routes.free_maps import free_maps_bp
-from .config import Config
+from config import Config
 from .flask_migrate import Migrate
 # Importar todos os modelos para garantir que sejam registrados
 from .models import *
