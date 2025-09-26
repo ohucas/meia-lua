@@ -5,7 +5,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react( ),tailwindcss()],
+  plugins: [react( ), tailwindcss()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -20,5 +20,6 @@ export default defineConfig({
       port: 5173,
     },
   },
-  base: './', // Esta linha foi adicionada/modificada
+  // A CORREÇÃO ESTÁ AQUI:
+  base: '/', 
 })
