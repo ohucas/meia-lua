@@ -1,11 +1,12 @@
 from flask import Flask, jsonify
-from backend.extensions import db, jwt, cors, bcrypt
-from backend.routes.treatment_units import treatment_units_bp
-from backend.routes.free_maps import free_maps_bp
-from backend.config import Config
+from .extensions import db, jwt, cors, bcrypt
+from .routes.treatment_units import treatment_units_bp
+from .routes.free_maps import free_maps_bp
+from .config import Config
 from flask_migrate import Migrate
-# Importar todos os modelos para garantir que sejam registrados
-from backend.models import *
+
+from .models import *
+
 
 def create_app():
     app = Flask(__name__)
@@ -20,7 +21,7 @@ def create_app():
             "allow_headers": ["Content-Type", "Authorization", "Access-Control-Allow-Origin"],
             "supports_credentials": True
         }
-    }  )
+    }   )
     bcrypt.init_app(app)
     migrate = Migrate(app, db)
 
