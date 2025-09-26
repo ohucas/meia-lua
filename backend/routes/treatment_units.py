@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from ..models.treatment_unit import TreatmentUnit
-from ..extensions import db
+from ..models.treatment_unit import TreatmentUnit 
+from ..extensions import db 
 import math
 
 treatment_units_bp = Blueprint('treatment_units', __name__)
