@@ -10,6 +10,9 @@ class TreatmentUnit(db.Model):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
     active = db.Column(db.Boolean, default=True)
+    specialization = db.Column(db.String(255), nullable=True)
+    unit_type = db.Column(db.String(50), nullable=True)
+
     
     def to_dict(self):
         return {
@@ -17,5 +20,7 @@ class TreatmentUnit(db.Model):
             'name': self.name,
             'address': self.address,
             'latitude': self.latitude,
-            'longitude': self.longitude
+            'longitude': self.longitude,
+            'specialization': self.specialization,
+            'unit_type': self.unit_type
         }
