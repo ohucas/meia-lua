@@ -23,7 +23,17 @@ def get_nearby_units():
         limit = data.get('limit', 10)    # limite padrão de 10 unidades
         
         # Query em todas as unidades ativas
-        units = TreatmentUnit.query.filter_by(active=True).all()
+        query = TreatmentUnit.query.filter_by(active=True)
+
+        # Filtrar por especialização em anemia falciforme
+        query = query.filter(TreatmentUnit.specialization.ilike("%anemia falciforme%"))
+
+        # Filtrar por tipo de unidade (público/privado) se fornecido
+        unit_type_filter = data.get("unit_type")
+        if unit_type_filter:
+            query = query.filter_by(unit_type=unit_type_filter)
+
+        units = query.all()
         
         # Calcular distâncias e filtrar por raio
         nearby_units = []
