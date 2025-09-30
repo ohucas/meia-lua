@@ -81,7 +81,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 rounded-md text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="block md:hidden p-2 rounded-md text-white hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -95,7 +95,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <div 
-          className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+          className={`block md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
             isMenuOpen ? 'max-h-96 py-4' : 'max-h-0 py-0'
           }`}
         >
@@ -123,4 +123,3 @@ const Header = () => {
 }
 
 export default Header
-
