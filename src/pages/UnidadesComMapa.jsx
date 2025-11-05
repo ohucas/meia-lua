@@ -108,12 +108,6 @@ const UnidadesComMapa = () => {
           setLocationError(errorMessage);
           setLocationLoading(false);
           setShowCitySearch(true);
-          // Fallback para localização padrão (Centro do Brasil)
-          const defaultLocation = { lat: -14.2350, lng: -51.9253 };
-          setUserLocation(defaultLocation);
-          setMapCenter([defaultLocation.lat, defaultLocation.lng]);
-          setMapZoom(4); // Zoom menor para o Brasil
-          fetchUnidades(defaultLocation.lat, defaultLocation.lng);
         },
         {
           enableHighAccuracy: true,
@@ -125,12 +119,6 @@ const UnidadesComMapa = () => {
       setLocationError('Geolocalização não é suportada por este navegador.');
       setLocationLoading(false);
       setShowCitySearch(true);
-      // Fallback para localização padrão (Centro do Brasil)
-      const defaultLocation = { lat: -14.2350, lng: -51.9253 };
-      setUserLocation(defaultLocation);
-      setMapCenter([defaultLocation.lat, defaultLocation.lng]);
-      setMapZoom(4); // Zoom menor para o Brasil
-      fetchUnidades(defaultLocation.lat, defaultLocation.lng);
     }
   };
 
@@ -139,15 +127,16 @@ const UnidadesComMapa = () => {
     console.log("=== INÍCIO searchByCity ===");
     console.log("Cidade pesquisada:", searchCity);
     
-if (!searchCity.trim()) {
-	      return;
-	    }
+    if (!searchCity.trim()) {
+      alert('Por favor, digite o nome de uma cidade');
+      return;
+    }
 
     setSearchLoading(true);
     setError(null);
 
     try {
-      const url = `${API_BASE_URL}/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000`;
+      const url = ${API_BASE_URL}/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000;
       console.log("URL da requisição:", url);
       
       const response = await fetch(url);
@@ -155,7 +144,7 @@ if (!searchCity.trim()) {
       console.log("Headers da resposta:", response.headers);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(HTTP error! status: ${response.status});
       }
       
       const data = await response.json();
@@ -182,7 +171,7 @@ if (!searchCity.trim()) {
       
     } catch (err) {
       console.error('Erro detalhado ao buscar unidades por cidade:', err);
-      setError(`Erro ao buscar unidades na cidade "${searchCity}": ${err.message}`);
+      setError(Erro ao buscar unidades na cidade "${searchCity}": ${err.message});
     } finally {
       setSearchLoading(false);
       console.log("=== FIM searchByCity ===");
@@ -198,14 +187,14 @@ if (!searchCity.trim()) {
       setLoading(true);
       setError(null);
       
-      const url = `${API_BASE_URL}/api/unidades?lat=${lat}&lng=${lng}&radius=50000`;
+      const url = ${API_BASE_URL}/api/unidades?lat=${lat}&lng=${lng}&radius=50000;
       console.log("URL da requisição:", url);
       
       const response = await fetch(url);
       console.log("Status da resposta:", response.status);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(HTTP error! status: ${response.status});
       }
       
       const data = await response.json();
@@ -224,7 +213,7 @@ if (!searchCity.trim()) {
       
     } catch (err) {
       console.error('Erro detalhado ao buscar unidades:', err);
-      setError(`Erro ao carregar as unidades: ${err.message}. Verifique se o backend está rodando.`);
+      setError(Erro ao carregar as unidades: ${err.message}. Verifique se o backend está rodando.);
     } finally {
       setLoading(false);
       console.log("=== FIM fetchUnidades ===");
@@ -233,14 +222,8 @@ if (!searchCity.trim()) {
 
   // Get initial data
   useEffect(() => {
-    if (searchCity.trim() !== '') {
-      const delayDebounceFn = setTimeout(() => {
-        searchByCity();
-      }, 500);
-
-      return () => clearTimeout(delayDebounceFn);
-    }
-  }, [searchCity]);
+    // Não buscar automaticamente, aguardar o usuário permitir a localização
+  }, []);
 
 
 
@@ -316,13 +299,42 @@ if (!searchCity.trim()) {
                     onChange={(e) => setSearchCity(e.target.value)}
                     placeholder="Digite o nome da cidade..."
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    onKeyPress={(e) => e.key === 'Enter' && searchByCity()}
                   />
-
+                  <button
+                    onClick={searchByCity}
+                    disabled={searchLoading}
+                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {searchLoading ? (
+                      <Loader2 className="animate-spin h-4 w-4" />
+                    ) : (
+                      <Search className="h-4 w-4" />
+                    )}
+                  </button>
                 </div>
               </div>
             )}
             
-
+            {userLocation && (
+              <button
+                onClick={() => fetchUnidades(userLocation.lat, userLocation.lng)}
+                disabled={loading}
+                className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" />
+                    Atualizando...
+                  </>
+                ) : (
+                  <>
+                    <RefreshCw className="mr-2" />
+                    Atualizar resultados
+                  </>
+                )}
+              </button>
+            )}
           </div>
           
           {locationError && (
@@ -422,8 +434,8 @@ if (!searchCity.trim()) {
                 
                 {/* Medical units markers */}
                 {unidades.map((unidade, index) => {
-                  console.log(`Renderizando marcador ${index}:`, unidade);
-                  console.log(`Posição: [${unidade.latitude}, ${unidade.longitude}]`);
+                  console.log(Renderizando marcador ${index}:, unidade);
+                  console.log(Posição: [${unidade.latitude}, ${unidade.longitude}]);
                   
                   return (
                     <Marker
@@ -435,7 +447,7 @@ if (!searchCity.trim()) {
                         <div className="p-2">
                           <div className="flex justify-between items-start mb-2">
                             <h3 className="font-semibold text-sm pr-2">{unidade.name}</h3>
-                            <span className={`text-xs font-medium px-2 py-1 rounded-full flex-shrink-0 ${getTypeColor(unidade.type)}`}>
+                            <span className={text-xs font-medium px-2 py-1 rounded-full flex-shrink-0 ${getTypeColor(unidade.type)}}>
                               {getTypeLabel(unidade.type)}
                             </span>
                           </div>
@@ -482,7 +494,7 @@ if (!searchCity.trim()) {
                 <div key={unidade.id} className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
                   <div className="flex justify-between items-start mb-3">
                     <h3 className="font-semibold text-lg pr-2">{unidade.name}</h3>
-                    <span className={`text-xs font-medium px-2 py-1 rounded-full flex-shrink-0 ${getTypeColor(unidade.type)}`}>
+                    <span className={text-xs font-medium px-2 py-1 rounded-full flex-shrink-0 ${getTypeColor(unidade.type)}}>
                       {getTypeLabel(unidade.type)}
                     </span>
                   </div>
