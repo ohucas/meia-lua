@@ -260,10 +260,10 @@ const UnidadesComMapa = ( ) => {
           
           <div className="flex flex-col items-center space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 items-center">
-              <button
-                onClick={getUserLocation}
-                disabled={locationLoading || loading}
-                className="bg-white text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+             <button
+              onClick={() => getUserLocation()} // Corrigido para garantir que a função seja chamada no clique
+              disabled={locationLoading || loading}
+             className="bg-white text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {locationLoading ? (
                   <>
