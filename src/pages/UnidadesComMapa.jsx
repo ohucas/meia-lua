@@ -10,7 +10,7 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-} );
+});
 
 // Ícones personalizados para diferentes tipos de unidades
 const publicIcon = new L.Icon({
@@ -20,7 +20,7 @@ const publicIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 const privateIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
@@ -29,7 +29,7 @@ const privateIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 const userIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -38,7 +38,7 @@ const userIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 // Componente para centralizar o mapa
 function MapController({ center, zoom }) {
@@ -55,7 +55,7 @@ function MapController({ center, zoom }) {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://meialuaback.onrender.com';
 
-const UnidadesComMapa = ( ) => {
+const UnidadesComMapa = () => {
   const [unidades, setUnidades] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -108,6 +108,12 @@ const UnidadesComMapa = ( ) => {
           setLocationError(errorMessage);
           setLocationLoading(false);
           setShowCitySearch(true);
+          // Fallback para localização padrão (Centro do Brasil)
+          const defaultLocation = { lat: -14.2350, lng: -51.9253 };
+          setUserLocation(defaultLocation);
+          setMapCenter([defaultLocation.lat, defaultLocation.lng]);
+          setMapZoom(4); // Zoom menor para o Brasil
+          fetchUnidades(defaultLocation.lat, defaultLocation.lng);
         },
         {
           enableHighAccuracy: true,
@@ -119,6 +125,12 @@ const UnidadesComMapa = ( ) => {
       setLocationError('Geolocalização não é suportada por este navegador.');
       setLocationLoading(false);
       setShowCitySearch(true);
+      // Fallback para localização padrão (Centro do Brasil)
+      const defaultLocation = { lat: -14.2350, lng: -51.9253 };
+      setUserLocation(defaultLocation);
+      setMapCenter([defaultLocation.lat, defaultLocation.lng]);
+      setMapZoom(4); // Zoom menor para o Brasil
+      fetchUnidades(defaultLocation.lat, defaultLocation.lng);
     }
   };
 
@@ -127,7 +139,7 @@ const UnidadesComMapa = ( ) => {
     console.log("=== INÍCIO searchByCity ===");
     console.log("Cidade pesquisada:", searchCity);
     
-    if (!searchCity.trim()) {
+if (!searchCity.trim()) {
 	      return;
 	    }
 
@@ -229,6 +241,7 @@ const UnidadesComMapa = ( ) => {
       return () => clearTimeout(delayDebounceFn);
     }
   }, [searchCity]);
+
 
 
   // Get type color based on unit type
@@ -405,7 +418,7 @@ const UnidadesComMapa = ( ) => {
                       </div>
                     </Popup>
                   </Marker>
-                 )}
+                )}
                 
                 {/* Medical units markers */}
                 {unidades.map((unidade, index) => {
