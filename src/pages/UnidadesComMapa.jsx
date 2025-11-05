@@ -10,7 +10,7 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-});
+} );
 
 // Ícones personalizados para diferentes tipos de unidades
 const publicIcon = new L.Icon({
@@ -20,7 +20,7 @@ const publicIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-});
+} );
 
 const privateIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
@@ -29,7 +29,7 @@ const privateIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-});
+} );
 
 const userIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -38,7 +38,7 @@ const userIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-});
+} );
 
 // Componente para centralizar o mapa
 function MapController({ center, zoom }) {
@@ -55,7 +55,7 @@ function MapController({ center, zoom }) {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://meialuaback.onrender.com';
 
-const UnidadesComMapa = () => {
+const UnidadesComMapa = ( ) => {
   const [unidades, setUnidades] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -128,9 +128,8 @@ const UnidadesComMapa = () => {
     console.log("Cidade pesquisada:", searchCity);
     
     if (!searchCity.trim()) {
-      alert('Por favor, digite o nome de uma cidade');
-      return;
-    }
+	      return;
+	    }
 
     setSearchLoading(true);
     setError(null);
@@ -222,9 +221,14 @@ const UnidadesComMapa = () => {
 
   // Get initial data
   useEffect(() => {
-    // Não buscar automaticamente, aguardar o usuário permitir a localização
-  }, []);
+    if (searchCity.trim() !== '') {
+      const delayDebounceFn = setTimeout(() => {
+        searchByCity();
+      }, 500);
 
+      return () => clearTimeout(delayDebounceFn);
+    }
+  }, [searchCity]);
 
 
   // Get type color based on unit type
@@ -299,42 +303,13 @@ const UnidadesComMapa = () => {
                     onChange={(e) => setSearchCity(e.target.value)}
                     placeholder="Digite o nome da cidade..."
                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                    onKeyPress={(e) => e.key === 'Enter' && searchByCity()}
                   />
-                  <button
-                    onClick={searchByCity}
-                    disabled={searchLoading}
-                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {searchLoading ? (
-                      <Loader2 className="animate-spin h-4 w-4" />
-                    ) : (
-                      <Search className="h-4 w-4" />
-                    )}
-                  </button>
+
                 </div>
               </div>
             )}
             
-            {userLocation && (
-              <button
-                onClick={() => fetchUnidades(userLocation.lat, userLocation.lng)}
-                disabled={loading}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="animate-spin mr-2" />
-                    Atualizando...
-                  </>
-                ) : (
-                  <>
-                    <RefreshCw className="mr-2" />
-                    Atualizar resultados
-                  </>
-                )}
-              </button>
-            )}
+
           </div>
           
           {locationError && (
@@ -430,7 +405,7 @@ const UnidadesComMapa = () => {
                       </div>
                     </Popup>
                   </Marker>
-                )}
+                 )}
                 
                 {/* Medical units markers */}
                 {unidades.map((unidade, index) => {
