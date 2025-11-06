@@ -27,7 +27,7 @@ const Dados = () => {
   const facts = [
     {
       title: "Origem Genética",
-      description: "A anemia falciforme é causada por uma mutação no gene da beta-globina, resultando na produção de hemoglobina S (HbS)."
+      description: "A doença falciforme é causada por uma mutação no gene da beta-globina, resultando na produção de hemoglobina S (HbS)."
     },
     {
       title: "Herança",
