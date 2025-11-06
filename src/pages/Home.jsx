@@ -10,10 +10,10 @@ const Home = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8">
             <div className="w-full md:w-1/2">
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                Meia Lua: Acesso Fácil à Informação e ao Tratamento da Anemia Falciforme!
+                Meia Lua: Acesso Fácil à Informação e ao Tratamento da Doença Falciforme!
               </h1>
               <p className="text-base sm:text-lg md:text-xl mb-8 leading-relaxed">
-                Um portal de acessibilidade dedicado ao entendimento da anemia falciforme, 
+                Um portal de acessibilidade dedicado ao entendimento da doença falciforme, 
                 oferecendo suporte informativo e ferramentas para localizar unidades de 
                 acompanhamento e centros de referência.
               </p>
