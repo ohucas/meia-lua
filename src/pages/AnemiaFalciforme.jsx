@@ -10,7 +10,7 @@ const AnemiaFalciforme = () => {
           <div className="flex flex-col lg:flex-row items-center">
             <div className="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-                Anemia Falciforme
+               Doença Falciforme
               </h1>
               <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed mb-8">
                 Saiba mais sobre a doença falciforme, uma condição genética que afeta milhares de pessoas. 
