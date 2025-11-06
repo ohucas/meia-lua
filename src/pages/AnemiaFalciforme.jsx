@@ -40,7 +40,7 @@ const AnemiaFalciforme = () => {
           <div className="flex flex-wrap items-center justify-between gap-8">
             <div className="flex-1 min-w-[300px]">
               <h2 className="text-3xl font-bold text-[#C8102E] mb-6">
-                O que é Anemia Falciforme?
+                O que é Doença Falciforme?
               </h2>
               <p className="text-lg leading-relaxed text-gray-700 mb-6">
                 A doença falciforme é uma <b>doença genética e hereditária</b> que afeta a produção de hemoglobina, 
