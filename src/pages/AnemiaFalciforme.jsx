@@ -13,7 +13,7 @@ const AnemiaFalciforme = () => {
                 Anemia Falciforme
               </h1>
               <p className="text-xl md:text-2xl lg:text-3xl leading-relaxed mb-8">
-                Saiba mais sobre a anemia falciforme, uma condição genética que afeta milhares de pessoas. 
+                Saiba mais sobre a doença falciforme, uma condição genética que afeta milhares de pessoas. 
                 Entenda seus sintomas, formas de diagnóstico e as melhores maneiras de conviver com a doença.
               </p>
             </div>
@@ -43,7 +43,7 @@ const AnemiaFalciforme = () => {
                 O que é Anemia Falciforme?
               </h2>
               <p className="text-lg leading-relaxed text-gray-700 mb-6">
-                A anemia falciforme é uma <b>doença genética e hereditária</b> que afeta a produção de hemoglobina, 
+                A doença falciforme é uma <b>doença genética e hereditária</b> que afeta a produção de hemoglobina, 
                 a proteína responsável pelo transporte de oxigênio no sangue. É caracterizada pela alteração na forma dos glóbulos vermelhos, que se tornam rígidos e em formato de foice (ou meia-lua) em vez de serem redondos e flexíveis. 
               </p>
               <p className="text-lg leading-relaxed text-gray-700 mb-6">
@@ -69,7 +69,7 @@ const AnemiaFalciforme = () => {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">Causas</h2>
           <p className="text-lg leading-relaxed mb-6">
-            A anemia falciforme é causada por uma <b>mutação genética</b> no gene da globina beta da hemoglobina (HbA). Essa mutação leva à produção de uma hemoglobina anormal, conhecida como <b>hemoglobina S (HbS)</b>. A doença é <b>hereditária</b>, o que significa que é transmitida de pais para filhos. Para que uma pessoa desenvolva a doença, ela precisa herdar o gene mutado de ambos os pais (<b>condição homozigótica SS</b>). Se herdar apenas um gene mutado (<b>condição heterozigótica AS</b>), a pessoa é portadora do <b>traço falciforme</b> e geralmente não apresenta sintomas da doença, mas pode transmiti-lo aos seus descendentes.
+            A doença falciforme é causada por uma <b>mutação genética</b> no gene da globina beta da hemoglobina (HbA). Essa mutação leva à produção de uma hemoglobina anormal, conhecida como <b>hemoglobina S (HbS)</b>. A doença é <b>hereditária</b>, o que significa que é transmitida de pais para filhos. Para que uma pessoa desenvolva a doença, ela precisa herdar o gene mutado de ambos os pais (<b>condição homozigótica SS</b>). Se herdar apenas um gene mutado (<b>condição heterozigótica AS</b>), a pessoa é portadora do <b>traço falciforme</b> e geralmente não apresenta sintomas da doença, mas pode transmiti-lo aos seus descendentes.
           </p>
         </div>
       </section>
@@ -94,7 +94,7 @@ const AnemiaFalciforme = () => {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold mb-6">Diagnóstico</h2>
           <p className="text-lg leading-relaxed mb-6">
-            O diagnóstico da anemia falciforme é feito principalmente através de <b>exames de sangue</b>:
+            O diagnóstico da doença falciforme é feito principalmente através de <b>exames de sangue</b>:
           </p>
           <ul className="space-y-4 text-lg">
             <li><b>Teste do Pezinho:</b> Principal método de triagem neonatal no Brasil.</li>
@@ -109,7 +109,7 @@ const AnemiaFalciforme = () => {
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-[#C8102E] mb-6">Tratamento e Cuidados</h2>
           <p className="text-lg leading-relaxed text-gray-700 mb-6">
-            O tratamento da anemia falciforme é multidisciplinar e visa aliviar os sintomas, prevenir complicações e melhorar a qualidade de vida. Inclui:
+            O tratamento da doença falciforme é multidisciplinar e visa aliviar os sintomas, prevenir complicações e melhorar a qualidade de vida. Inclui:
           </p>
           <ul className="space-y-4 text-lg text-gray-700 mb-8">
             <li><b>Hidroxiureia:</b> Medicamento que estimula a produção de hemoglobina fetal, reduzindo a frequência das crises de dor e a necessidade de transfusões.</li>
@@ -123,7 +123,7 @@ const AnemiaFalciforme = () => {
           <ul className="space-y-3 text-lg text-gray-700 mb-6 list-disc pl-6">
             <li>Manter-se bem hidratado para evitar a desidratação, que pode desencadear crises</li>
             <li>Evitar temperaturas extremas, tanto frio quanto calor excessivo</li>
-            <li>Manter o calendário vacinal em dia, incluindo vacinas especiais para pessoas com anemia falciforme</li>
+            <li>Manter o calendário vacinal em dia, incluindo vacinas especiais para pessoas com doença falciforme</li>
             <li>Praticar atividade física moderada, com orientação médica</li>
             <li>Ter acompanhamento médico regular com hematologista e outros especialistas conforme necessário</li>
           </ul>
