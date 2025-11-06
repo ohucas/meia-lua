@@ -8,9 +8,9 @@ const UnidadesNova = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [locationError, setLocationError] = useState(null);
 
-  // Sample data for healthcare facilities
+  
   const sampleUnits = [
-    // Public Reference Centers
+
     {
       id: 'hemoba-salvador',
       name: 'HEMOBA - Hemocentro da Bahia',
@@ -37,7 +37,7 @@ const UnidadesNova = () => {
       isReference: true,
       isPrivate: false
     },
-    // Private Clinics
+
     {
       id: 'hospital-santa-izabel',
       name: 'Hospital Santa Izabel - Serviço de Hematologia',
@@ -79,7 +79,7 @@ const UnidadesNova = () => {
     }
   ];
 
-  // Get user location
+
   const getUserLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -93,7 +93,7 @@ const UnidadesNova = () => {
         (error) => {
           console.error('Erro ao obter localização:', error);
           setLocationError('Não foi possível obter sua localização');
-          // Use default location (Salvador, BA)
+   
           setUserLocation({
             lat: -12.9714,
             lng: -38.5014
@@ -103,7 +103,7 @@ const UnidadesNova = () => {
       );
     } else {
       setLocationError('Geolocalização não suportada pelo navegador');
-      // Use default location (Salvador, BA)
+
       setUserLocation({
         lat: -12.9714,
         lng: -38.5014
@@ -112,14 +112,13 @@ const UnidadesNova = () => {
     }
   };
 
-  // Fetch healthcare units
+
   const fetchUnidades = async (lat, lng) => {
     try {
       setLoading(true);
       setError(null);
       
-      // In a real app, you would fetch from an API here
-      // For now, we'll use the sample data
+
       setTimeout(() => {
         setUnidades(sampleUnits);
         setLoading(false);
@@ -137,16 +136,15 @@ const UnidadesNova = () => {
     getUserLocation();
   }, []);
 
-  // Check if location is in Salvador
+
   const isInSalvador = (lat, lng) => {
-    // Simple bounds check for Salvador
+   
     return (
       lat >= -13.1 && lat <= -12.8 &&
       lng >= -38.6 && lng <= -38.3
     );
   };
 
-  // Format distance
   const formatDistance = (distance) => {
     if (!distance) return '';
     return distance < 1 
@@ -154,7 +152,7 @@ const UnidadesNova = () => {
       : `${distance.toFixed(1)}km`;
   };
 
-  // Get type color
+ 
   const getTypeColor = (type) => {
     return type === 'hospital' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800';
   };
@@ -270,7 +268,7 @@ const UnidadesNova = () => {
           )}
         </section>
 
-        {/* Private Clinics */}
+        {}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-6 flex items-center">
             <MapPin className="text-purple-600 mr-2" />
@@ -358,7 +356,7 @@ const UnidadesNova = () => {
           )}
         </section>
 
-        {/* Emergency Information */}
+        {}
         <section className="bg-red-50 rounded-lg p-8">
           <h2 className="text-2xl font-bold text-center text-red-700 mb-8">
             Informações de Emergência
