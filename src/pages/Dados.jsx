@@ -5,7 +5,7 @@ const Dados = () => {
     {
       title: "Prevalência no Brasil",
       value: "1 em 1.000",
-      description: "nascimentos são afetados pela anemia falciforme"
+      description: "nascimentos são afetados pela doença falciforme"
     },
     {
       title: "Região Nordeste",
