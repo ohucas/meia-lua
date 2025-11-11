@@ -224,11 +224,11 @@ const UnidadesComMapa = ( ) => {
 
 
   useEffect(() => {
-   
+    // Tenta obter a localização do usuário ao carregar o componente
     getUserLocation();
   }, []);
   
-
+  // Efeito para buscar unidades quando a localização do usuário é definida
   useEffect(() => {
     if (userLocation && !unidades.length && !loading && !error) {
       fetchUnidades(userLocation.lat, userLocation.lng);
@@ -242,6 +242,7 @@ const UnidadesComMapa = ( ) => {
     return 'bg-gray-100 text-gray-800';
   };
 
+  // Get type label
   const getTypeLabel = (type) => {
     if (type === 'publica') return 'Pública';
     if (type === 'privada') return 'Privada';
@@ -477,13 +478,6 @@ const UnidadesComMapa = ( ) => {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-800 text-white py-6 mt-12">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; {new Date().getFullYear()} Meia-Lua. Todos os direitos reservados.</p>
-        </div>
-      </footer>
     </div>
   );
 };
