@@ -397,6 +397,17 @@ const UnidadesComMapa = ( ) => {
             </div>
           </section>
         )}
+        
+        {/* Legenda Adicionada Aqui */}
+        <div className="mb-4 p-3 bg-gray-100 rounded-lg shadow-sm text-sm text-gray-700">
+          <span className="font-medium">Legenda:</span>
+          <span className="ml-3">🔴 Sua localização</span>
+          <span className="ml-3">🔵 Unidades Públicas</span>
+          <span className="ml-3">🟣 Unidades Privadas</span>
+        </div>
+
+        {/* Map Section */}
+        {/* ... */}
 
         {/* Map Section */}
          {(userLocation || unidades.length > 0) && (
