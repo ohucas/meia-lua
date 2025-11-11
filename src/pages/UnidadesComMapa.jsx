@@ -4,15 +4,15 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-
+// Fix para ícones do Leaflet no React
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-} );
+});
 
-
+// Ícones personalizados para diferentes tipos de unidades
 const publicIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -20,7 +20,7 @@ const publicIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 const privateIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
@@ -29,7 +29,7 @@ const privateIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 const userIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -38,9 +38,9 @@ const userIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
-
+// Componente para centralizar o mapa
 function MapController({ center, zoom }) {
   const map = useMap();
   
@@ -55,7 +55,7 @@ function MapController({ center, zoom }) {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://meialuaback.onrender.com';
 
-const UnidadesComMapa = ( ) => {
+const UnidadesComMapa = () => {
   const [unidades, setUnidades] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -64,11 +64,11 @@ const UnidadesComMapa = ( ) => {
   const [locationLoading, setLocationLoading] = useState(false);
   const [searchCity, setSearchCity] = useState('');
   const [searchLoading, setSearchLoading] = useState(false);
-  const [mapCenter, setMapCenter] = useState([-14.2350, -51.9253]);
+  const [mapCenter, setMapCenter] = useState([-14.2350, -51.9253]); // Centro do Brasil
   const [mapZoom, setMapZoom] = useState(4);
   const [showCitySearch, setShowCitySearch] = useState(false);
 
- 
+  // Get user location
   const getUserLocation = () => {
     setLocationLoading(true);
     setLocationError(null);
@@ -87,7 +87,7 @@ const UnidadesComMapa = ( ) => {
           fetchUnidades(location.lat, location.lng);
         },
         (error) => {
-          console.error('Erro ao obter localização:', error.code, error.message); 
+          console.error('Erro ao obter localização:', error);
           let errorMessage = 'Não foi possível obter sua localização. ';
           
           switch(error.code) {
@@ -112,7 +112,7 @@ const UnidadesComMapa = ( ) => {
         {
           enableHighAccuracy: true,
           timeout: 10000,
-          maximumAge: 300000 
+          maximumAge: 300000 // 5 minutos
         }
       );
     } else {
@@ -122,7 +122,7 @@ const UnidadesComMapa = ( ) => {
     }
   };
 
-
+  // Search by city
   const searchByCity = async () => {
     console.log("=== INÍCIO searchByCity ===");
     console.log("Cidade pesquisada:", searchCity);
@@ -178,7 +178,7 @@ const UnidadesComMapa = ( ) => {
     }
   };
 
- 
+  // Fetch healthcare units from backend
   const fetchUnidades = async (lat, lng) => {
     console.log("=== INÍCIO fetchUnidades ===");
     console.log("Coordenadas:", lat, lng);
@@ -220,12 +220,14 @@ const UnidadesComMapa = ( ) => {
     }
   };
 
-
+  // Get initial data
   useEffect(() => {
-
+    // Não buscar automaticamente, aguardar o usuário permitir a localização
   }, []);
-  
 
+
+
+  // Get type color based on unit type
   const getTypeColor = (type) => {
     if (type === 'publica') return 'bg-blue-100 text-blue-800';
     if (type === 'privada') return 'bg-purple-100 text-purple-800';
@@ -239,14 +241,14 @@ const UnidadesComMapa = ( ) => {
     return 'Não especificado';
   };
 
-
+  // Get marker icon based on unit type
   const getMarkerIcon = (type) => {
     if (type === 'publica') return publicIcon;
     if (type === 'privada') return privateIcon;
     return publicIcon;
   };
 
-
+  // Separate units by type
   const publicUnits = unidades.filter(u => u.type === 'publica');
   const privateUnits = unidades.filter(u => u.type === 'privada');
 
@@ -261,7 +263,7 @@ const UnidadesComMapa = ( ) => {
           <div className="flex flex-col items-center space-y-4">
             <div className="flex flex-col sm:flex-row gap-4 items-center">
               <button
-                onClick={() => getUserLocation()}
+                onClick={getUserLocation}
                 disabled={locationLoading || loading}
                 className="bg-white text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -279,7 +281,7 @@ const UnidadesComMapa = ( ) => {
               </button>
               
               <button
-                onClick={() => setShowCitySearch(prev => !prev)}
+                onClick={() => setShowCitySearch(!showCitySearch)}
                 className="bg-red-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-red-600 transition-colors flex items-center"
               >
                 <Search className="mr-2" />
@@ -428,7 +430,7 @@ const UnidadesComMapa = ( ) => {
                       </div>
                     </Popup>
                   </Marker>
-                 )}
+                )}
                 
                 {/* Medical units markers */}
                 {unidades.map((unidade, index) => {
