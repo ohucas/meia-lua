@@ -50,9 +50,6 @@ O projeto é dividido em duas partes principais: Frontend (Cliente) e Backend (S
 | **Flask**              | Micro-framework web para a construção da API RESTful.                        |
 | **SQLAlchemy**         | ORM (Mapeador Objeto-Relacional) para interação com o banco de dados.        |
 | **Flask-Migrate**      | Extensão para gerenciar migrações de banco de dados (Alembic).               |
-| **Flask-JWT-Extended** | Implementação de autenticação baseada em JSON Web Tokens (JWT).              |
-| **Flask-Bcrypt**       | Hashing seguro de senhas.                                                    |
-| **Gunicorn**           | Servidor WSGI para implantação em produção.                                  |
 
 
 
