@@ -29,45 +29,30 @@ Design Responsivo: Interface moderna e acessível, construída com React, Tailwi
 
 O projeto é dividido em duas partes principais: Frontend (Cliente) e Backend (Servidor).
 
-Frontend (Cliente)
+## 🖥️ Frontend (Cliente)
 
-Tecnologia
-Descrição
-React
-Biblioteca JavaScript para construção da interface de usuário.
-Vite
-Ferramenta de build rápido para o desenvolvimento frontend.
-Tailwind CSS
-Framework CSS utility-first para estilização rápida e responsiva.
-Radix UI
-Biblioteca de componentes acessíveis e não estilizados.
-React Router DOM
-Gerenciamento de rotas e navegação na aplicação.
-Leaflet / React-Leaflet
-Biblioteca para mapas interativos e visualização de geolocalização.
-Recharts
-Biblioteca para visualização de dados (gráficos).
+| **Tecnologia**            | **Descrição**                                                                 |
+|----------------------------|------------------------------------------------------------------------------|
+| **React**                  | Biblioteca JavaScript para construção da interface de usuário.               |
+| **Vite**                   | Ferramenta de build rápido para o desenvolvimento frontend.                  |
+| **Tailwind CSS**           | Framework CSS *utility-first* para estilização rápida e responsiva.          |
+| **Radix UI**               | Biblioteca de componentes acessíveis e não estilizados.                      |
+| **React Router DOM**       | Gerenciamento de rotas e navegação na aplicação.                             |
+| **Leaflet / React-Leaflet**| Biblioteca para mapas interativos e visualização de geolocalização.          |
+| **Recharts**               | Biblioteca para visualização de dados (gráficos).                            |
 
 
-Backend (Servidor)
+## ⚙️ Backend (Servidor)
 
-Tecnologia
-Descrição
-Python
-Linguagem de programação principal.
-Flask
-Micro-framework web para a construção da API RESTful.
-SQLAlchemy
-ORM (Mapeador Objeto-Relacional) para interação com o banco de dados.
-Flask-Migrate
-Extensão para gerenciar migrações de banco de dados (Alembic).
-Flask-JWT-Extended
-Implementação de autenticação baseada em JSON Web Tokens (JWT).
-Flask-Bcrypt
-Hashing seguro de senhas.
-Gunicorn
-Servidor WSGI para implantação em produção.
-psycopg
-Adaptador para banco de dados PostgreSQL.
+| **Tecnologia**        | **Descrição**                                                                 |
+|------------------------|------------------------------------------------------------------------------|
+| **Python**             | Linguagem de programação principal.                                          |
+| **Flask**              | Micro-framework web para a construção da API RESTful.                        |
+| **SQLAlchemy**         | ORM (Mapeador Objeto-Relacional) para interação com o banco de dados.        |
+| **Flask-Migrate**      | Extensão para gerenciar migrações de banco de dados (Alembic).               |
+| **Flask-JWT-Extended** | Implementação de autenticação baseada em JSON Web Tokens (JWT).              |
+| **Flask-Bcrypt**       | Hashing seguro de senhas.                                                    |
+| **Gunicorn**           | Servidor WSGI para implantação em produção.                                  |
+
 
 
