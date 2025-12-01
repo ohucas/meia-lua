@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MapPin, Phone, Clock, Navigation, AlertCircle, Loader2, Map, RefreshCw, Search } from 'lucide-react';
+import { MapPin, Phone, Clock, Navigation, AlertCircle, Loader2, Map, RefreshCw, Search, Filter } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -10,7 +10,7 @@ L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
   iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-} );
+});
 
 // Ícones personalizados para diferentes tipos de unidades
 const publicIcon = new L.Icon({
@@ -20,7 +20,7 @@ const publicIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 const privateIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
@@ -29,7 +29,7 @@ const privateIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 const userIcon = new L.Icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -38,7 +38,7 @@ const userIcon = new L.Icon({
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
-} );
+});
 
 // Componente para centralizar o mapa
 function MapController({ center, zoom }) {
@@ -55,7 +55,7 @@ function MapController({ center, zoom }) {
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://meialuaback.onrender.com';
 
-const UnidadesComMapa = ( ) => {
+const UnidadesComMapa = () => {
   const [unidades, setUnidades] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -67,6 +67,15 @@ const UnidadesComMapa = ( ) => {
   const [mapCenter, setMapCenter] = useState([-14.2350, -51.9253]); // Centro do Brasil
   const [mapZoom, setMapZoom] = useState(4);
   const [showCitySearch, setShowCitySearch] = useState(false);
+  
+  // Novo estado para o filtro
+  const [filterType, setFilterType] = useState('todos');
+
+  // Lógica de filtragem
+  const filteredUnidades = unidades.filter(unidade => {
+    if (filterType === 'todos') return true;
+    return unidade.type === filterType;
+  });
 
   // Get user location
   const getUserLocation = () => {
@@ -87,7 +96,7 @@ const UnidadesComMapa = ( ) => {
           fetchUnidades(location.lat, location.lng);
         },
         (error) => {
-          console.error('Erro ao obter localização:', error.code, error.message); // Log detalhado
+          console.error('Erro ao obter localização:', error.code, error.message);
           let errorMessage = 'Não foi possível obter sua localização. ';
           
           switch(error.code) {
@@ -124,9 +133,6 @@ const UnidadesComMapa = ( ) => {
 
   // Search by city
   const searchByCity = async () => {
-    console.log("=== INÍCIO searchByCity ===");
-    console.log("Cidade pesquisada:", searchCity);
-    
     if (!searchCity.trim()) {
       alert('Por favor, digite o nome de uma cidade');
       return;
@@ -137,30 +143,21 @@ const UnidadesComMapa = ( ) => {
 
     try {
       const url = `${API_BASE_URL}/api/unidades?cidade=${encodeURIComponent(searchCity)}&radius=50000`;
-      console.log("URL da requisição:", url);
       
       const response = await fetch(url);
-      console.log("Status da resposta:", response.status);
-      console.log("Headers da resposta:", response.headers);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();
-      console.log("Dados recebidos da API:", data);
-      console.log("Tipo de data.data:", typeof data.data);
-      console.log("Array.isArray(data.data):", Array.isArray(data.data));
-      console.log("Quantidade de unidades:", data.data ? data.data.length : 0);
       
       if (data.success) {
         const unidadesData = data.data || [];
-        console.log("Definindo unidades:", unidadesData);
         setUnidades(unidadesData);
         
         if (data.search_location) {
           const { latitude, longitude } = data.search_location;
-          console.log("Definindo localização do mapa:", latitude, longitude);
           setMapCenter([latitude, longitude]);
           setMapZoom(12);
           setUserLocation({ lat: latitude, lng: longitude });
@@ -174,38 +171,27 @@ const UnidadesComMapa = ( ) => {
       setError(`Erro ao buscar unidades na cidade "${searchCity}": ${err.message}`);
     } finally {
       setSearchLoading(false);
-      console.log("=== FIM searchByCity ===");
     }
   };
 
   // Fetch healthcare units from backend
   const fetchUnidades = async (lat, lng) => {
-    console.log("=== INÍCIO fetchUnidades ===");
-    console.log("Coordenadas:", lat, lng);
-    
     try {
       setLoading(true);
       setError(null);
       
       const url = `${API_BASE_URL}/api/unidades?lat=${lat}&lng=${lng}&radius=50000`;
-      console.log("URL da requisição:", url);
       
       const response = await fetch(url);
-      console.log("Status da resposta:", response.status);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
       const data = await response.json();
-      console.log("Dados recebidos da API:", data);
-      console.log("Tipo de data.data:", typeof data.data);
-      console.log("Array.isArray(data.data):", Array.isArray(data.data));
-      console.log("Quantidade de unidades:", data.data ? data.data.length : 0);
       
       if (data.success) {
         const unidadesData = data.data || [];
-        console.log("Definindo unidades:", unidadesData);
         setUnidades(unidadesData);
       } else {
         throw new Error(data.message || 'Erro ao buscar unidades');
@@ -216,15 +202,9 @@ const UnidadesComMapa = ( ) => {
       setError(`Erro ao carregar as unidades: ${err.message}. Verifique se o backend está rodando.`);
     } finally {
       setLoading(false);
-      console.log("=== FIM fetchUnidades ===");
     }
   };
 
-  // Get initial data
-  useEffect(() => {
-    // Não buscar automaticamente, aguardar o usuário permitir a localização
-  }, []);
-  
   // Get type color based on unit type
   const getTypeColor = (type) => {
     if (type === 'publica') return 'bg-blue-100 text-blue-800';
@@ -246,10 +226,6 @@ const UnidadesComMapa = ( ) => {
     return publicIcon;
   };
 
-  // Separate units by type
-  const publicUnits = unidades.filter(u => u.type === 'publica');
-  const privateUnits = unidades.filter(u => u.type === 'privada');
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -259,7 +235,7 @@ const UnidadesComMapa = ( ) => {
           <p className="text-xl mb-8">Centros de referência e clínicas especializadas em anemia falciforme próximos à sua localização</p>
           
           <div className="flex flex-col items-center space-y-4">
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-center flex-wrap justify-center">
               <button
                 onClick={() => getUserLocation()}
                 disabled={locationLoading || loading}
@@ -285,6 +261,21 @@ const UnidadesComMapa = ( ) => {
                 <Search className="mr-2" />
                 Buscar por cidade
               </button>
+
+              {/* Filtro Adicionado Aqui */}
+              <div className="relative">
+                <select
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
+                  className="bg-white text-red-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors appearance-none cursor-pointer pr-10 focus:outline-none"
+                  style={{ minWidth: '180px' }}
+                >
+                  <option value="todos">Todos</option>
+                  <option value="publica">Unidades Públicas</option>
+                  <option value="privada">Unidades Privadas</option>
+                </select>
+                <Filter className="absolute right-3 top-1/2 transform -translate-y-1/2 text-red-600 w-4 h-4 pointer-events-none" />
+              </div>
             </div>
             
             {/* City Search */}
@@ -398,7 +389,7 @@ const UnidadesComMapa = ( ) => {
           </section>
         )}
         
-        {/* Legenda Adicionada Aqui */}
+        {/* Legenda */}
         <div className="mb-4 p-3 bg-gray-100 rounded-lg shadow-sm text-sm text-gray-700">
           <span className="font-medium">Legenda:</span>
           <span className="ml-3">🔴 Sua localização</span>
@@ -407,10 +398,7 @@ const UnidadesComMapa = ( ) => {
         </div>
 
         {/* Map Section */}
-        {/* ... */}
-
-        {/* Map Section */}
-         {(userLocation || unidades.length > 0) && (
+        {(userLocation || unidades.length > 0) && (
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6 flex items-center">
               <Map className="text-red-600 mr-2" />
@@ -441,11 +429,8 @@ const UnidadesComMapa = ( ) => {
                   </Marker>
                  )}
                 
-                {/* Medical units markers */}
-                {unidades.map((unidade, index) => {
-                  console.log(`Renderizando marcador ${index}:`, unidade);
-                  console.log(`Posição: [${unidade.latitude}, ${unidade.longitude}]`);
-                  
+                {/* Medical units markers (FILTRADO) */}
+                {filteredUnidades.map((unidade) => {
                   return (
                     <Marker
                       key={unidade.id}
@@ -490,16 +475,16 @@ const UnidadesComMapa = ( ) => {
           </section>
         )}
 
-        {/* Units List */}
-        {unidades.length > 0 && (
+        {/* Units List (FILTRADO) */}
+        {filteredUnidades.length > 0 && (
           <section>
             <h2 className="text-2xl font-bold mb-6 flex items-center">
               <MapPin className="text-red-600 mr-2" />
-              Unidades Encontradas
+              Unidades Encontradas {filterType !== 'todos' && `(${getTypeLabel(filterType)})`}
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {unidades.map((unidade) => (
+              {filteredUnidades.map((unidade) => (
                 <div key={unidade.id} className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
                   <div className="flex justify-between items-start mb-3">
                     <h3 className="font-semibold text-lg pr-2">{unidade.name}</h3>
@@ -529,8 +514,11 @@ const UnidadesComMapa = ( ) => {
           </section>
         )}
 
-        {/* No Units Found */}
-        {!loading && !error && unidades.length === 0 && (userLocation || showCitySearch) && (
+        {/* No Units Found (Se houver unidades mas o filtro esconder todas, ou se não houver unidades na região) */}
+        {!loading && !error && (
+            (unidades.length === 0 && (userLocation || showCitySearch)) || 
+            (unidades.length > 0 && filteredUnidades.length === 0)
+          ) && (
           <section className="mb-12">
             <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-lg">
               <div className="flex">
@@ -539,8 +527,10 @@ const UnidadesComMapa = ( ) => {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-yellow-700">
-                    Nenhuma unidade especializada em anemia falciforme foi encontrada na região pesquisada.
-                    Tente expandir o raio de busca ou entre em contato com o sistema de saúde local.
+                    {unidades.length > 0 && filteredUnidades.length === 0 
+                      ? "Nenhuma unidade deste tipo encontrada nos resultados."
+                      : "Nenhuma unidade especializada em anemia falciforme foi encontrada na região pesquisada."
+                    }
                   </p>
                 </div>
               </div>
